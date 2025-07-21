@@ -86,6 +86,7 @@
 
 <script>
   const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSf-vR_Z4v8x6y6wIYg-Ki9_LKC3rrWydxglt8uxAkTdAWbJ6A/formResponse";
+
   const entries = {
     name: "entry.147771650",
     index: "entry.1154045172",
@@ -126,20 +127,16 @@
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  document.getElementById("mainForm").addEventListener("submit", async function(e) {
+  document.getElementById("mainForm").addEventListener("submit", async function (e) {
     e.preventDefault();
+
     const studentName = this.studentName.value.trim();
     const indexNumber = this.indexNumber.value.trim();
 
-    if (!studentName || !indexNumber) {
-      alert("Please fill name and index number.");
-      return;
-    }
+    const subjectRows = document.querySelectorAll(".subject-row");
+    let successCount = 0;
 
-    const rows = document.querySelectorAll(".subject-row");
-    let submittedCount = 0;
-
-    for (let row of rows) {
+    for (let row of subjectRows) {
       const subject = row.querySelector("select[name='subject']").value;
       const result = row.querySelector("select[name='result']").value;
 
@@ -156,12 +153,12 @@
           body: formData
         });
 
-        submittedCount++;
-        await sleep(500); // wait 500ms before next submission
+        await sleep(1000); // Wait 1 second to prevent data loss
+        successCount++;
       }
     }
 
-    alert(submittedCount + " subject(s) submitted successfully!");
+    alert(`✅ ${successCount} subject(s) submitted!`);
 
     // Reset form
     this.reset();
