@@ -122,6 +122,10 @@
     container.appendChild(row);
   }
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   document.getElementById("mainForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     const studentName = this.studentName.value.trim();
@@ -133,6 +137,7 @@
     }
 
     const rows = document.querySelectorAll(".subject-row");
+    let submittedCount = 0;
 
     for (let row of rows) {
       const subject = row.querySelector("select[name='subject']").value;
@@ -151,11 +156,12 @@
           body: formData
         });
 
-        await new Promise(resolve => setTimeout(resolve, 500)); // wait 500ms
+        submittedCount++;
+        await sleep(500); // wait 500ms before next submission
       }
     }
 
-    alert("All subjects submitted successfully!");
+    alert(submittedCount + " subject(s) submitted successfully!");
 
     // Reset form
     this.reset();
@@ -185,7 +191,6 @@
       </div>`;
   });
 </script>
-
 
 </body>
 </html>
