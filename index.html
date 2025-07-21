@@ -1,203 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>O/L Result Submission</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>O/L Results Submission</title>
   <style>
     body {
       font-family: sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
-    }
-    .container {
-      background: white;
       max-width: 600px;
       margin: auto;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    .subject-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .subject-row select {
-      flex: 1;
+      background: #f0f8ff;
     }
     h2 {
       text-align: center;
+      color: #006699;
     }
-    .add-btn {
-      background: #28a745;
-      color: white;
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
     }
-    .submit-btn {
-      background: #007bff;
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #006699;
       color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    .success {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
     }
   </style>
 </head>
 <body>
+  <h2>O/L Results Submission Form</h2>
+  <form id="olForm" action="https://docs.google.com/forms/d/e/1FAIpQLSf-vR_Z4v8x6y6wIYg-Ki9_LKC3rrWydxglt8uxAkTdAWbJ6A/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true">
+    <label for="name">Name</label>
+    <input type="text" name="entry.147771650" id="name" required />
 
-<div class="container">
-  <h2>O/L Result Submission</h2>
-  <form id="mainForm">
-    <input type="text" name="studentName" placeholder="Student Name" required>
-    <input type="text" name="indexNumber" placeholder="Index Number" required>
+    <label for="index">Index Number</label>
+    <input type="number" name="entry.1154045172" id="index" required />
 
-    <div id="subjectContainer">
-      <div class="subject-row">
-        <select name="subject" required>
-          <option value="">Select Subject</option>
-          <option>Science(Sinhala Medium)</option>
-          <option>Mathematics(Sinhala Medium)</option>
-          <option>English</option>
-          <option>Sinhala</option>
-          <option>History</option>
-          <option>Commerce</option>
-          <option>Japan</option>
-          <option>ICT</option>
-          <option>Science(English Medium)</option>
-          <option>Mathematics(English Medium)</option>
-        </select>
-        <select name="result" required>
-          <option value="">Select Result</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
-          <option>S</option>
-          <option>W</option>
-        </select>
-      </div>
-    </div>
+    <label>Science</label>
+    <select name="entry.831143142">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
 
-    <button type="button" class="add-btn" onclick="addSubject()">+ Add Another Subject</button>
-    <button type="submit" class="submit-btn">Submit All</button>
+    <label>Mathematics</label>
+    <select name="entry.2008730932">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>English</label>
+    <select name="entry.1515020581">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>Sinhala</label>
+    <select name="entry.503287552">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>History</label>
+    <select name="entry.1962632198">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>Commerce</label>
+    <select name="entry.1122678909">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>Japan</label>
+    <select name="entry.64559803">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>ICT</label>
+    <select name="entry.985318750">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>Science (English Medium)</label>
+    <select name="entry.2089838907">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <label>Mathematics (English Medium)</label>
+    <select name="entry.1553185780">
+      <option value="">--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="S">S</option>
+      <option value="W">W</option>
+    </select>
+
+    <button type="submit">Submit</button>
+    <div class="success" id="successMessage">Thank you! Your result has been submitted.</div>
   </form>
-</div>
 
-<script>
-  const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSf-vR_Z4v8x6y6wIYg-Ki9_LKC3rrWydxglt8uxAkTdAWbJ6A/formResponse";
+  <iframe name="hidden_iframe" style="display:none;" onload="if(submitted){document.getElementById('olForm').reset();document.getElementById('successMessage').style.display='block';}"></iframe>
 
-  const entries = {
-    name: "entry.147771650",
-    index: "entry.1154045172",
-    subject: "entry.831143142",
-    result: "entry.459883525"
-  };
-
-  function addSubject() {
-    const container = document.getElementById("subjectContainer");
-    const row = document.createElement("div");
-    row.className = "subject-row";
-    row.innerHTML = `
-      <select name="subject" required>
-        <option value="">Select Subject</option>
-        <option>Science(Sinhala Medium)</option>
-        <option>Mathematics(Sinhala Medium)</option>
-        <option>English</option>
-        <option>Sinhala</option>
-        <option>History</option>
-        <option>Commerce</option>
-        <option>Japan</option>
-        <option>ICT</option>
-        <option>Science(English Medium)</option>
-        <option>Mathematics(English Medium)</option>
-      </select>
-      <select name="result" required>
-        <option value="">Select Result</option>
-        <option>A</option>
-        <option>B</option>
-        <option>C</option>
-        <option>S</option>
-        <option>W</option>
-      </select>`;
-    container.appendChild(row);
-  }
-
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  document.getElementById("mainForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const studentName = this.studentName.value.trim();
-    const indexNumber = this.indexNumber.value.trim();
-
-    if (!studentName || !indexNumber) {
-      alert("Please enter student name and index number.");
-      return;
-    }
-
-    const rows = document.querySelectorAll(".subject-row");
-    let submittedCount = 0;
-
-    for (let i = 0; i < rows.length; i++) {
-      const subject = rows[i].querySelector("select[name='subject']").value;
-      const result = rows[i].querySelector("select[name='result']").value;
-
-      if (!subject || !result) {
-        alert(`Missing subject or result in row ${i + 1}. Please fix and try again.`);
-        return;
-      }
-
-      console.log(`Submitting row ${i + 1}: ${studentName}, ${indexNumber}, ${subject}, ${result}`);
-
-      const formData = new FormData();
-      formData.append(entries.name, studentName);
-      formData.append(entries.index, indexNumber);
-      formData.append(entries.subject, subject);
-      formData.append(entries.result, result);
-
-      await fetch(formURL, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
-      });
-
-      await sleep(1200); // wait for Google Form to process
-      submittedCount++;
-    }
-
-    alert(`✅ ${submittedCount} subjects submitted successfully!`);
-
-    this.reset();
-    document.getElementById("subjectContainer").innerHTML = `
-      <div class="subject-row">
-        <select name="subject" required>
-          <option value="">Select Subject</option>
-          <option>Science(Sinhala Medium)</option>
-          <option>Mathematics(Sinhala Medium)</option>
-          <option>English</option>
-          <option>Sinhala</option>
-          <option>History</option>
-          <option>Commerce</option>
-          <option>Japan</option>
-          <option>ICT</option>
-          <option>Science(English Medium)</option>
-          <option>Mathematics(English Medium)</option>
-        </select>
-        <select name="result" required>
-          <option value="">Select Result</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
-          <option>S</option>
-          <option>W</option>
-        </select>
-      </div>`;
-  });
-</script>
-
-
+  <script>
+    let submitted = false;
+  </script>
 </body>
 </html>
