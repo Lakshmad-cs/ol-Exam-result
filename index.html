@@ -133,34 +133,43 @@
     const studentName = this.studentName.value.trim();
     const indexNumber = this.indexNumber.value.trim();
 
-    const subjectRows = document.querySelectorAll(".subject-row");
-    let successCount = 0;
-
-    for (let row of subjectRows) {
-      const subject = row.querySelector("select[name='subject']").value;
-      const result = row.querySelector("select[name='result']").value;
-
-      if (subject && result) {
-        const formData = new FormData();
-        formData.append(entries.name, studentName);
-        formData.append(entries.index, indexNumber);
-        formData.append(entries.subject, subject);
-        formData.append(entries.result, result);
-
-        await fetch(formURL, {
-          method: "POST",
-          mode: "no-cors",
-          body: formData
-        });
-
-        await sleep(1000); // Wait 1 second to prevent data loss
-        successCount++;
-      }
+    if (!studentName || !indexNumber) {
+      alert("Please enter student name and index number.");
+      return;
     }
 
-    alert(`✅ ${successCount} subject(s) submitted!`);
+    const rows = document.querySelectorAll(".subject-row");
+    let submittedCount = 0;
 
-    // Reset form
+    for (let i = 0; i < rows.length; i++) {
+      const subject = rows[i].querySelector("select[name='subject']").value;
+      const result = rows[i].querySelector("select[name='result']").value;
+
+      if (!subject || !result) {
+        alert(`Missing subject or result in row ${i + 1}. Please fix and try again.`);
+        return;
+      }
+
+      console.log(`Submitting row ${i + 1}: ${studentName}, ${indexNumber}, ${subject}, ${result}`);
+
+      const formData = new FormData();
+      formData.append(entries.name, studentName);
+      formData.append(entries.index, indexNumber);
+      formData.append(entries.subject, subject);
+      formData.append(entries.result, result);
+
+      await fetch(formURL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      });
+
+      await sleep(1200); // wait for Google Form to process
+      submittedCount++;
+    }
+
+    alert(`✅ ${submittedCount} subjects submitted successfully!`);
+
     this.reset();
     document.getElementById("subjectContainer").innerHTML = `
       <div class="subject-row">
@@ -188,6 +197,7 @@
       </div>`;
   });
 </script>
+
 
 </body>
 </html>
