@@ -150,6 +150,8 @@
           mode: "no-cors",
           body: formData
         });
+
+        await new Promise(resolve => setTimeout(resolve, 500)); // wait 500ms
       }
     }
 
@@ -183,6 +185,7 @@
       </div>`;
   });
 </script>
+
 
 </body>
 </html>
