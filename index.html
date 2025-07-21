@@ -65,7 +65,7 @@
           <option>Commerce</option>
           <option>Japan</option>
           <option>ICT</option>
-	  <option>Science(English Medium)</option>
+          <option>Science(English Medium)</option>
           <option>Mathematics(English Medium)</option>
         </select>
         <select name="result" required>
@@ -74,7 +74,7 @@
           <option>B</option>
           <option>C</option>
           <option>S</option>
-	  <option>W</option>
+          <option>W</option>
         </select>
       </div>
     </div>
@@ -98,7 +98,7 @@
     const row = document.createElement("div");
     row.className = "subject-row";
     row.innerHTML = `
-      <select required>
+      <select name="subject" required>
         <option value="">Select Subject</option>
         <option>Science(Sinhala Medium)</option>
         <option>Mathematics(Sinhala Medium)</option>
@@ -111,7 +111,7 @@
         <option>Science(English Medium)</option>
         <option>Mathematics(English Medium)</option>
       </select>
-      <select required>
+      <select name="result" required>
         <option value="">Select Result</option>
         <option>A</option>
         <option>B</option>
@@ -122,18 +122,21 @@
     container.appendChild(row);
   }
 
-  document.getElementById("mainForm").addEventListener("submit", function(e) {
+  document.getElementById("mainForm").addEventListener("submit", async function(e) {
     e.preventDefault();
+    const studentName = this.studentName.value.trim();
+    const indexNumber = this.indexNumber.value.trim();
 
-    const studentName = this.studentName.value;
-    const indexNumber = this.indexNumber.value;
+    if (!studentName || !indexNumber) {
+      alert("Please fill name and index number.");
+      return;
+    }
 
     const rows = document.querySelectorAll(".subject-row");
 
-    rows.forEach(row => {
-      const selects = row.querySelectorAll("select");
-      const subject = selects[0].value;
-      const result = selects[1].value;
+    for (let row of rows) {
+      const subject = row.querySelector("select[name='subject']").value;
+      const result = row.querySelector("select[name='result']").value;
 
       if (subject && result) {
         const formData = new FormData();
@@ -142,21 +145,21 @@
         formData.append(entries.subject, subject);
         formData.append(entries.result, result);
 
-        fetch(formURL, {
+        await fetch(formURL, {
           method: "POST",
           mode: "no-cors",
           body: formData
         });
       }
-    });
+    }
 
-    alert("All subjects submitted!");
+    alert("All subjects submitted successfully!");
+
+    // Reset form
     this.reset();
-
-    // Reset to one default subject-result pair
     document.getElementById("subjectContainer").innerHTML = `
       <div class="subject-row">
-        <select required>
+        <select name="subject" required>
           <option value="">Select Subject</option>
           <option>Science(Sinhala Medium)</option>
           <option>Mathematics(Sinhala Medium)</option>
@@ -169,7 +172,7 @@
           <option>Science(English Medium)</option>
           <option>Mathematics(English Medium)</option>
         </select>
-        <select required>
+        <select name="result" required>
           <option value="">Select Result</option>
           <option>A</option>
           <option>B</option>
@@ -180,7 +183,6 @@
       </div>`;
   });
 </script>
-
 
 </body>
 </html>
